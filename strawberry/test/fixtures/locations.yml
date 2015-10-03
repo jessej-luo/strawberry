@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  city: MyString
+  country: MyString
+  scholarship: MyString
+  contest: MyString
+  extracurricular: MyString
+
+two:
+  city: MyString
+  country: MyString
+  scholarship: MyString
+  contest: MyString
+  extracurricular: MyString
