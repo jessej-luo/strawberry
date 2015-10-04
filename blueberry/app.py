@@ -1,7 +1,8 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request, redirect
 import models as m
 
 app = Flask(__name__)
+app.debug = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/database.db'
 DATABASE = 'database.db'
 
@@ -15,13 +16,20 @@ def get_db():
 def main():
     return render_template("index.html")
 
-@app.route("/signup', methods=['POST']")
+@app.route("/signup", methods=['GET'])
 def signup():
+    return render_template('signup.html')
+
+@app.route("/signup", methods=["POST"])
+def receive_signup():
+    signup(request.form['email'], request.form['password'])
+    return redirect('/signup')
+
+def signup(email, password):
     userInfo = (email, password)
     user = m.User(userInfo[0], userInfo[1])
-    m.db.add(user)
+    m.db.session.add(user)
     m.db.session.commit()
-
 
 
 if __name__ == "__main__":
